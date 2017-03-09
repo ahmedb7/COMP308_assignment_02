@@ -8,8 +8,8 @@ let passport = require('passport');
 let UserModel = require('../models/users');
 let User = UserModel.User; // alias for User Model - User object
 
-// define the game model
-let game = require('../models/games');
+// define the contact model
+let contact = require('contacts');
 
 // create a function to check if the user is authenticated
 function requireAuth(req, res, next) {
@@ -20,17 +20,17 @@ function requireAuth(req, res, next) {
   next();
 }
 
-/* GET games List page. READ */
+/* GET contacts List page. READ */
 router.get('/', requireAuth, (req, res, next) => {
-  // find all games in the games collection
-  game.find( (err, games) => {
+  // find all contacts in the contacts collection
+  contact.find( (err, contacts) => {
     if (err) {
       return console.error(err);
     }
     else {
-      res.render('games/index', {
-        title: 'Games',
-        games: games,
+      res.render('contacts/index', {
+        title: 'contacts',
+        contacts: contacts,
         displayName: req.user.displayName
       });
     }
@@ -38,51 +38,51 @@ router.get('/', requireAuth, (req, res, next) => {
 
 });
 
-//  GET the Game Details page in order to add a new Game
+//  GET the contact Details page in order to add a new contact
 router.get('/add', requireAuth, (req, res, next) => {
-  res.render('games/details', {
-    title: "Add a new Game",
-    games: '',
+  res.render('contacts/details', {
+    title: "Add a new contact",
+    contacts: '',
     displayName: req.user.displayName
   });
 });
 
-// POST process the Game Details page and create a new Game - CREATE
+// POST process the contact Details page and create a new contact - CREATE
 router.post('/add', requireAuth, (req, res, next) => {
 
-    let newGame = game({
+    let newcontact = contact({
       "name": req.body.name,
       "cost": req.body.cost,
       "rating": req.body.rating
     });
 
-    game.create(newGame, (err, game) => {
+    contact.create(newcontact, (err, contact) => {
       if(err) {
         console.log(err);
         res.end(err);
       } else {
-        res.redirect('/games');
+        res.redirect('/contacts');
       }
     });
 });
 
-// GET the Game Details page in order to edit a new Game
+// GET the contact Details page in order to edit a new contact
 router.get('/:id', requireAuth, (req, res, next) => {
 
     try {
       // get a reference to the id from the url
       let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
 
-        // find one game by its id
-      game.findById(id, (err, games) => {
+        // find one contact by its id
+      contact.findById(id, (err, contacts) => {
         if(err) {
           console.log(err);
           res.end(error);
         } else {
-          // show the game details view
-          res.render('games/details', {
-              title: 'Game Details',
-              games: games,
+          // show the contact details view
+          res.render('contacts/details', {
+              title: 'contact Details',
+              contacts: contacts,
               displayName: req.user.displayName
           });
         }
@@ -98,20 +98,20 @@ router.post('/:id', requireAuth, (req, res, next) => {
   // get a reference to the id from the url
     let id = req.params.id;
 
-     let updatedGame = game({
+     let updatedcontact = contact({
        "_id": id,
       "name": req.body.name,
       "cost": req.body.cost,
       "rating": req.body.rating
     });
 
-    game.update({_id: id}, updatedGame, (err) => {
+    contact.update({_id: id}, updatedcontact, (err) => {
       if(err) {
         console.log(err);
         res.end(err);
       } else {
-        // refresh the game List
-        res.redirect('/games');
+        // refresh the contact List
+        res.redirect('/contacts');
       }
     });
 
@@ -122,13 +122,13 @@ router.get('/delete/:id', requireAuth, (req, res, next) => {
   // get a reference to the id from the url
     let id = req.params.id;
 
-    game.remove({_id: id}, (err) => {
+    contact.remove({_id: id}, (err) => {
       if(err) {
         console.log(err);
         res.end(err);
       } else {
-        // refresh the games list
-        res.redirect('/games');
+        // refresh the contacts list
+        res.redirect('/contacts');
       }
     });
 });
