@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 
 // create a model class
-let gamesSchema = mongoose.Schema({
+let contactsSchema = mongoose.Schema({
     name: String,
     Phone:Number,
     Email:String

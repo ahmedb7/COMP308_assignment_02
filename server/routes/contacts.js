@@ -81,7 +81,7 @@ router.get('/:id', requireAuth, (req, res, next) => {
         } else {
           // show the contact details view
           res.render('contacts/details', {
-              title: 'contact Details',
+              title: 'Contact Details',
               contacts: contacts,
               displayName: req.user.displayName
           });
@@ -100,9 +100,9 @@ router.post('/:id', requireAuth, (req, res, next) => {
 
      let updatedcontact = contact({
        "_id": id,
-      "name": req.body.name,
-      "cost": req.body.cost,
-      "rating": req.body.rating
+      "Name": req.body.name,
+      "Phone": req.body.phone,
+      "Email": req.body.email
     });
 
     contact.update({_id: id}, updatedcontact, (err) => {

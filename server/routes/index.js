@@ -22,7 +22,7 @@ function requireAuth(req, res, next) {
 
 /* GET home page. wildcard */
 router.get('/', (req, res, next) => {
-  res.render('content/index', {
+  res.render('contents/index', {
     title: 'Home',
     contacts: '',
     displayName: req.user ? req.user.displayName : ''
@@ -30,8 +30,8 @@ router.get('/', (req, res, next) => {
 });
 
 /* GET contact page. */
-router.get('/contact', (req, res, next) => {
-  res.render('content/contact', {
+router.get('/contacts', (req, res, next) => {
+  res.render('contents/contact', {
     title: 'Contact',
     contacts: '',
     displayName: req.user ? req.user.displayName : ''
