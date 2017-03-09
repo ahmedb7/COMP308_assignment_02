@@ -1,5 +1,5 @@
-# COMP308-W2017-Lesson6B
+# COMP308-W2017-Assignment-02
 
-## Welcome to Lesson 6 - Authentication with Passport
+## Welcome Benzir's Assignment 02
 
 please use **`npm install`** to install project dependencies
