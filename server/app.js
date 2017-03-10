@@ -30,6 +30,7 @@ db.once('open', () => {
 let index = require('./routes/index'); // top level routes
 let contacts = require('./routes/contacts'); // routes for contacts
 
+
 let app = express();
 
 // view engine setup
