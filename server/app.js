@@ -1,3 +1,7 @@
+// app.js
+// Benzir Ahmed
+// Portfolio Site
+// Assignment 2 Authentication
 // modules required for the project
 let express = require('express');
 let path = require('path'); // part of node.js core
